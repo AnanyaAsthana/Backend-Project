@@ -1,4 +1,5 @@
 //require("dotenv").config({path : './env'});
+
 import dotenv from "dotenv";
 
 import mongoose from "mongoose";
@@ -7,9 +8,35 @@ import connectDB from "./db/index.js";
 
 dotenv.config({path : './.env'});
 
-connectDB();
+connectDB()
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`server is running at port : ${process.env.PORT}`)
+    })
+})
+.catch((err) => {
+    console.log("MONGO DB connection failed !!!", err)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* approach one by making iffi and using async await inside it.
+
 import express from "express";
 import dotenv from "dotenv";
 
@@ -28,7 +55,7 @@ const app = express();
         });
 
     }catch(error){
-        console.error("ERROR: ", error);
+        console.error("ERROR (utils/index.js): ", error);
         throw error
     }
 } )()
